@@ -1,20 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity,
-  SafeAreaView,
-  StatusBar
-} from 'react-native';
-import { Header } from '@/src/components/Header';
-import { StoreSelector } from '@/src/components/StoreSelector';
-import { PromotionalBanner } from '@/src/components/PromotionalBanner';
 import { CategoryFilter } from '@/src/components/CategoryFilter';
 import { CoffeeCard } from '@/src/components/CoffeeCard';
+import { Header } from '@/src/components/Header';
+import { PromotionalBanner } from '@/src/components/PromotionalBanner';
+import { StoreSelector } from '@/src/components/StoreSelector';
 import { useStore } from '@/src/store';
-import { Coffee, CategoryFilter as CategoryType, Promotion } from '@/src/types';
+import { CategoryFilter as CategoryType, Coffee, Promotion } from '@/src/types';
+import React, { useMemo, useState } from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 const mockCoffees: Coffee[] = [
   {
@@ -51,7 +51,25 @@ const mockCoffees: Coffee[] = [
     id: '6',
     name: 'Green Tea Latte',
     price: 6.00,
-    image: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a79?w=400',
+    image: 'https://images.unsplash.com/photo-1749280447307-31a68eb38673?w=400',
+  },
+  {
+    id: '7',
+    name: 'Chocolate Cake',
+    price: 7.50,
+    image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400',
+  },
+  {
+    id: '8',
+    name: 'Cheesecake',
+    price: 8.00,
+    image: 'https://images.unsplash.com/photo-1635327173758-85badf17f995?w=400',
+  },
+  {
+    id: '9',
+    name: 'Red Velvet Cake',
+    price: 7.00,
+    image: 'https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=400',
   },
 ];
 
@@ -72,7 +90,7 @@ const promotions: Promotion[] = [
   },
 ];
 
-const categories: CategoryType[] = ['All', 'Smoothies', 'Coffee Based', 'Tea'];
+const categories: CategoryType[] = ['All', 'Smoothies', 'Coffee', 'Tea', 'Cake'];
 
 export default function HomeScreen() {
   const { 
@@ -85,13 +103,13 @@ export default function HomeScreen() {
     favorites
   } = useStore();
   
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType>('Coffee Based');
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>('Coffee');
 
   const filteredCoffees = useMemo(() => {
     if (selectedCategory === 'All') return mockCoffees;
     
     return mockCoffees.filter(coffee => {
-      if (selectedCategory === 'Coffee Based') {
+      if (selectedCategory === 'Coffee') {
         return ['Ice Caffe Latte', 'Espresso', 'Cold Brew', 'Cappuccino'].includes(coffee.name);
       }
       if (selectedCategory === 'Smoothies') {
@@ -99,6 +117,9 @@ export default function HomeScreen() {
       }
       if (selectedCategory === 'Tea') {
         return coffee.name.includes('Tea');
+      }
+      if (selectedCategory === 'Cake') {
+        return coffee.name.includes('Cake') || coffee.name.includes('Cheesecake');
       }
       return false;
     });

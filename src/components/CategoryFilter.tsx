@@ -1,12 +1,13 @@
-import React from 'react';
-import { 
-  Text, 
-  StyleSheet, 
-  ScrollView, 
-  TouchableOpacity 
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { CategoryFilter as CategoryType } from '@/src/types';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
 
 interface CategoryFilterProps {
   categories: CategoryType[];
@@ -19,27 +20,51 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory, 
   onSelectCategory 
 }) => {
+  const [showLeftGradient, setShowLeftGradient] = useState(false);
+  const [showRightGradient, setShowRightGradient] = useState(true);
   const getCategoryIcon = (category: CategoryType) => {
     switch (category) {
       case 'All':
         return 'grid-outline';
       case 'Smoothies':
         return 'ice-cream-outline';
-      case 'Coffee Based':
+      case 'Coffee':
         return 'cafe-outline';
       case 'Tea':
         return 'leaf-outline';
+      case 'Cake':
+        return 'restaurant-outline';
       default:
         return 'grid-outline';
     }
   };
 
+  const handleScroll = (event: any) => {
+    const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
+    const scrollPosition = contentOffset.x;
+    const maxScroll = contentSize.width - layoutMeasurement.width;
+    
+    setShowLeftGradient(scrollPosition > 10);
+    setShowRightGradient(scrollPosition < maxScroll - 10);
+  };
+
   return (
-    <ScrollView 
-      horizontal 
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.container}
-    >
+    <View style={styles.wrapper}>
+      {showLeftGradient && (
+        <View style={[styles.gradient, styles.leftGradient]} pointerEvents="none" />
+      )}
+      {showRightGradient && (
+        <View style={[styles.gradient, styles.rightGradient]} pointerEvents="none">
+          <Text style={styles.scrollHint}>→</Text>
+        </View>
+      )}
+      <ScrollView 
+        horizontal 
+        showsHorizontalScrollIndicator={true}
+        contentContainerStyle={styles.container}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
+      >
       {categories.map((category) => {
         const isSelected = category === selectedCategory;
         return (
@@ -59,14 +84,43 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
           </TouchableOpacity>
         );
       })}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    position: 'relative',
+  },
   container: {
     paddingHorizontal: 20,
     paddingVertical: 10,
+    paddingBottom: 15,
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: 30,
+    zIndex: 1,
+    pointerEvents: 'none',
+  },
+  leftGradient: {
+    left: 0,
+    backgroundColor: 'rgba(250,250,250,0.95)',
+  },
+  rightGradient: {
+    right: 0,
+    backgroundColor: 'rgba(250,250,250,0.95)',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 5,
+  },
+  scrollHint: {
+    fontSize: 18,
+    color: '#999',
+    fontWeight: 'bold',
   },
   filterButton: {
     flexDirection: 'row',

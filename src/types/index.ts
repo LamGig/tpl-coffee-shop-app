@@ -25,4 +25,4 @@ export interface Promotion {
   image: string;
 }
 
-export type CategoryFilter = 'All' | 'Smoothies' | 'Coffee Based' | 'Tea';
+export type CategoryFilter = 'All' | 'Smoothies' | 'Coffee' | 'Tea' | 'Cake';
