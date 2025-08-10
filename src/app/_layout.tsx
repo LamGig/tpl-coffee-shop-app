@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Stack, router } from "expo-router";
+import React, { useEffect, useState } from 'react';
+import { Stack, router, usePathname } from "expo-router";
 import { View } from 'react-native';
 import { BottomNavigation, TabName } from '@/src/components/BottomNavigation';
 import { useStore } from '@/src/store';
@@ -7,6 +7,20 @@ import { useStore } from '@/src/store';
 export default function RootLayout() {
   const [activeTab, setActiveTab] = useState<TabName>('Home');
   const getCartItemCount = useStore((state) => state.getCartItemCount);
+  const pathname = usePathname();
+
+  // Update active tab based on current route
+  useEffect(() => {
+    if (pathname === '/' || pathname.startsWith('/details')) {
+      setActiveTab('Home');
+    } else if (pathname === '/cart') {
+      setActiveTab('Cart');
+    } else if (pathname === '/orders') {
+      setActiveTab('Orders');
+    } else if (pathname === '/profile') {
+      setActiveTab('Profile');
+    }
+  }, [pathname]);
 
   const handleTabPress = (tab: TabName) => {
     setActiveTab(tab);
