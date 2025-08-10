@@ -1,21 +1,21 @@
-import React, { useState, useMemo } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-  StatusBar,
-} from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { useStore } from '@/src/store';
 import { OptionSelector } from '@/src/components/OptionSelector';
-import { ToppingSelector } from '@/src/components/ToppingSelector';
 import { QuantitySelector } from '@/src/components/QuantitySelector';
+import { ToppingSelector } from '@/src/components/ToppingSelector';
+import { useStore } from '@/src/store';
 import { CartItemOptions } from '@/src/types';
+import { Ionicons } from '@expo/vector-icons';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import React, { useMemo, useState } from 'react';
+import {
+  Image,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const defaultCoffeeData = {
   temperatures: [
@@ -41,6 +41,7 @@ const defaultCoffeeData = {
 
 export default function CoffeeDetailsScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams();
   const { addToCartWithOptions, toggleFavorite, favorites, getCoffeeById } = useStore();
   
@@ -103,7 +104,7 @@ export default function CoffeeDetailsScreen() {
 
   if (!coffee) {
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={[styles.safeArea]} edges={['left', 'right', 'top']}>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Coffee not found</Text>
           <TouchableOpacity onPress={() => router.back()}>
@@ -115,7 +116,7 @@ export default function CoffeeDetailsScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea]} edges={['left', 'right', 'top']}>
       <StatusBar barStyle="light-content" />
       
       <View style={styles.imageContainer}>

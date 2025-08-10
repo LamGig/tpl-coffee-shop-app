@@ -2,7 +2,8 @@ import { OrderCard } from '@/src/components/OrderCard';
 import { OrderTabs } from '@/src/components/OrderTabs';
 import { Order, OrderStatus } from '@/src/types/order';
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const mockOrders: Order[] = [
   {
@@ -89,6 +90,7 @@ const mockOrders: Order[] = [
 ];
 
 export default function OrdersScreen() {
+  const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<OrderStatus>('active');
 
   const filteredOrders = mockOrders.filter(order => order.status === activeTab);
@@ -110,7 +112,7 @@ export default function OrdersScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]} edges={['left', 'right', 'top']}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>My Orders</Text>
       </View>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, router, usePathname } from "expo-router";
 import { View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { BottomNavigation, TabName } from '@/src/components/BottomNavigation';
 import { useStore } from '@/src/store';
 
@@ -43,17 +44,19 @@ export default function RootLayout() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-      <BottomNavigation 
-        activeTab={activeTab} 
-        onTabPress={handleTabPress}
-        cartItemCount={getCartItemCount()}
-      />
-    </View>
+    <SafeAreaProvider>
+      <View style={{ flex: 1 }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+        <BottomNavigation 
+          activeTab={activeTab} 
+          onTabPress={handleTabPress}
+          cartItemCount={getCartItemCount()}
+        />
+      </View>
+    </SafeAreaProvider>
   );
 }

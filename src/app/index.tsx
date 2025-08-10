@@ -5,10 +5,9 @@ import { PromotionalBanner } from '@/src/components/PromotionalBanner';
 import { StoreSelector } from '@/src/components/StoreSelector';
 import { useStore } from '@/src/store';
 import { CategoryFilter as CategoryType, Coffee, Promotion } from '@/src/types';
-import React, { useMemo, useState } from 'react';
 import { useRouter } from 'expo-router';
+import React, { useMemo, useState } from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -16,6 +15,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const defaultOptions = {
   temperatures: [
@@ -190,6 +190,7 @@ const categories: CategoryType[] = ['All', 'Smoothies', 'Coffee', 'Tea', 'Cake']
 
 export default function HomeScreen() {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const { 
     user, 
     selectedStore, 
@@ -241,8 +242,8 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
+    <SafeAreaView style={[styles.safeArea]} edges={['left', 'right', 'top']}>
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
       <ScrollView 
         style={styles.container}
         showsVerticalScrollIndicator={false}

@@ -7,16 +7,17 @@ import {
   FlatList,
   Image,
   Modal,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function CartScreen() {
+  const insets = useSafeAreaInsets();
   const { cart, updateCartItemQuantity, removeFromCart, getCartTotal, selectedStore, stores, setSelectedStore } = useCoffeeStore();
   const [orderType, setOrderType] = useState<'Sit In' | 'To Go'>('Sit In');
   const [showLocationPicker, setShowLocationPicker] = useState(false);
@@ -108,7 +109,7 @@ export default function CartScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]} edges={['left', 'right', 'top']}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
           <Ionicons name="chevron-back" size={24} color="#000" />
