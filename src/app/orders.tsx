@@ -1,8 +1,6 @@
-import { TabName } from '@/src/components/BottomNavigation';
 import { OrderCard } from '@/src/components/OrderCard';
 import { OrderTabs } from '@/src/components/OrderTabs';
 import { Order, OrderStatus } from '@/src/types/order';
-import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -91,26 +89,9 @@ const mockOrders: Order[] = [
 ];
 
 export default function OrdersScreen() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState<OrderStatus>('active');
 
   const filteredOrders = mockOrders.filter(order => order.status === activeTab);
-
-  const handleTabChange = (tab: TabName) => {
-    switch(tab) {
-      case 'Home':
-        router.push('/');
-        break;
-      case 'Cart':
-        router.push('/cart');
-        break;
-      case 'Orders':
-        break;
-      case 'Profile':
-        console.log('Navigate to Profile screen');
-        break;
-    }
-  };
 
   const handleCancel = (orderId: string) => {
     console.log('Cancel order:', orderId);
