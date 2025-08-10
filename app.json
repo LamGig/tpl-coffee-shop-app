@@ -1,22 +1,29 @@
 {
   "expo": {
-    "name": "tpl-coffee-shop-app",
+    "name": "LamGig Coffee",
     "slug": "tpl-coffee-shop-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "tplcoffeeshopapp",
+    "scheme": "lamgigcoffee",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lamgig.lamgigcoffee"
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#fdf2de"
       },
-      "edgeToEdgeEnabled": true
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.INTERNET"
+      ],
+      "package": "com.lamgig.lamgigcoffee",
+      "edgeToEdgeEnabled": false
     },
     "web": {
       "bundler": "metro",
