@@ -4,6 +4,42 @@ export interface Coffee {
   price: number;
   image: string;
   isFavorite?: boolean;
+  description?: string;
+  temperatures?: TemperatureOption[];
+  sizes?: SizeOption[];
+  sugarLevels?: SugarLevel[];
+  toppings?: Topping[];
+}
+
+export interface TemperatureOption {
+  id: string;
+  name: string;
+  available: boolean;
+}
+
+export interface SizeOption {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface SugarLevel {
+  id: string;
+  name: string;
+}
+
+export interface Topping {
+  id: string;
+  name: string;
+  price: number;
+}
+
+export interface CartItemOptions {
+  temperature?: string;
+  size?: string;
+  sugarLevel?: string;
+  toppings?: string[];
+  quantity: number;
 }
 
 export interface User {
