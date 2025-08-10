@@ -3,7 +3,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
+  FlatList,
   Image,
+  Modal,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -14,9 +16,8 @@ import {
 } from 'react-native';
 
 export default function CartScreen() {
-  const { cart, updateCartItemQuantity, removeFromCart, getCartTotal } = useCoffeeStore();
+  const { cart, updateCartItemQuantity, removeFromCart, getCartTotal, selectedStore, stores, setSelectedStore } = useCoffeeStore();
   const [orderType, setOrderType] = useState<'Sit In' | 'To Go'>('Sit In');
-  const [storeLocation] = useState('Brew Sanctuary');
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [notes, setNotes] = useState<{ [key: string]: string }>({});
 
@@ -98,15 +99,15 @@ export default function CartScreen() {
         {/* Store Location */}
         <TouchableOpacity 
           style={styles.locationContainer}
-          onPress={() => setShowLocationPicker(!showLocationPicker)}
+          onPress={() => setShowLocationPicker(true)}
         >
           <View style={styles.locationIcon}>
             <Ionicons name="business" size={20} color="#666" />
           </View>
           <View style={styles.locationInfo}>
             <Text style={styles.locationLabel}>Take your order at</Text>
-            <Text style={styles.locationName}>{storeLocation}</Text>
-            <Text style={styles.locationAddress}>Jl. Cikuray No. 12, Tarogong Kaler</Text>
+            <Text style={styles.locationName}>{selectedStore.name}</Text>
+            <Text style={styles.locationAddress}>{selectedStore.address}</Text>
           </View>
           <Ionicons name="chevron-down" size={20} color="#666" />
         </TouchableOpacity>
@@ -218,6 +219,48 @@ export default function CartScreen() {
 
         <View style={styles.bottomPadding} />
       </ScrollView>
+
+      {/* Store Selection Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showLocationPicker}
+        onRequestClose={() => setShowLocationPicker(false)}
+      >
+        <TouchableOpacity 
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowLocationPicker(false)}
+        >
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Select Store</Text>
+              <TouchableOpacity onPress={() => setShowLocationPicker(false)}>
+                <Ionicons name="close" size={24} color="#333" />
+              </TouchableOpacity>
+            </View>
+            <FlatList
+              data={stores}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={[
+                    styles.storeItem,
+                    item.id === selectedStore.id && styles.selectedStoreItem
+                  ]}
+                  onPress={() => {
+                    setSelectedStore(item);
+                    setShowLocationPicker(false);
+                  }}
+                >
+                  <Text style={styles.storeItemName}>{item.name}</Text>
+                  <Text style={styles.storeItemAddress}>{item.address}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
 
       {/* Bottom Payment Button */}
       <View style={styles.bottomContainer}>
@@ -520,5 +563,50 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#fff',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: '#FFF',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 20,
+    maxHeight: '70%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+  },
+  storeItem: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  selectedStoreItem: {
+    backgroundColor: '#F5F5F5',
+  },
+  storeItemName: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 4,
+  },
+  storeItemAddress: {
+    fontSize: 14,
+    color: '#666',
   },
 });
