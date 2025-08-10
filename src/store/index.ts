@@ -1,4 +1,4 @@
-import { Coffee, Store, User, CartItemOptions } from '@/src/types';
+import { CartItemOptions, Coffee, Store, User } from '@/src/types';
 import { create } from 'zustand';
 
 interface CartItem {
@@ -38,24 +38,24 @@ export const useStore = create<AppState>((set, get) => ({
   },
   selectedStore: {
     id: '1',
-    name: 'CIPLAZ Garut, Garut Kota',
-    address: 'Jl. Ahmad Yani No. 123, Garut',
+    name: 'LamGig Coffee, Downtown Manhattan',
+    address: '342 Broadway, New York, NY 10013',
   },
   stores: [
     {
       id: '1',
-      name: 'CIPLAZ Garut, Garut Kota',
-      address: 'Jl. Ahmad Yani No. 123, Garut',
+      name: 'LamGig Coffee, Downtown Manhattan',
+      address: '342 Broadway, New York, NY 10013',
     },
     {
       id: '2',
-      name: 'CIPLAZ Bandung, Dago',
-      address: 'Jl. Ir. H. Djuanda No. 456, Bandung',
+      name: 'LamGig Coffee, Brooklyn Heights',
+      address: '156 Montague Street, Brooklyn, NY 11201',
     },
     {
       id: '3',
-      name: 'CIPLAZ Jakarta, Senopati',
-      address: 'Jl. Senopati No. 789, Jakarta Selatan',
+      name: 'LamGig Coffee, Santa Monica',
+      address: '1428 3rd Street Promenade, Santa Monica, CA 90401',
     },
   ],
   cart: [],
