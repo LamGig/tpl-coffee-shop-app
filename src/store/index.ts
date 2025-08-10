@@ -2,6 +2,7 @@ import { Coffee, Store, User, CartItemOptions } from '@/src/types';
 import { create } from 'zustand';
 
 interface CartItem {
+  id: string;
   coffee: Coffee;
   quantity: number;
   options?: Omit<CartItemOptions, 'quantity'>;
@@ -19,8 +20,9 @@ interface AppState {
   setSelectedStore: (store: Store) => void;
   addToCart: (coffee: Coffee) => void;
   addToCartWithOptions: (coffee: Coffee, options: CartItemOptions) => void;
-  removeFromCart: (coffeeId: string) => void;
+  removeFromCart: (itemId: string) => void;
   updateCartQuantity: (coffeeId: string, quantity: number) => void;
+  updateCartItemQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
   toggleFavorite: (coffeeId: string) => void;
   getCartItemCount: () => number;
@@ -75,11 +77,12 @@ export const useStore = create<AppState>((set, get) => ({
         ),
       };
     }
-    return { cart: [...state.cart, { coffee, quantity: 1 }] };
+    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return { cart: [...state.cart, { id, coffee, quantity: 1 }] };
   }),
   
-  removeFromCart: (coffeeId) => set((state) => ({
-    cart: state.cart.filter(item => item.coffee.id !== coffeeId),
+  removeFromCart: (itemId) => set((state) => ({
+    cart: state.cart.filter(item => item.id !== itemId),
   })),
   
   updateCartQuantity: (coffeeId, quantity) => set((state) => {
@@ -89,6 +92,17 @@ export const useStore = create<AppState>((set, get) => ({
     return {
       cart: state.cart.map(item =>
         item.coffee.id === coffeeId ? { ...item, quantity } : item
+      ),
+    };
+  }),
+  
+  updateCartItemQuantity: (itemId, quantity) => set((state) => {
+    if (quantity <= 0) {
+      return { cart: state.cart.filter(item => item.id !== itemId) };
+    }
+    return {
+      cart: state.cart.map(item =>
+        item.id === itemId ? { ...item, quantity } : item
       ),
     };
   }),
@@ -155,8 +169,10 @@ export const useStore = create<AppState>((set, get) => ({
       return { cart: newCart };
     }
     
+    const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     return { 
       cart: [...state.cart, { 
+        id,
         coffee, 
         quantity, 
         options: itemOptions 
@@ -171,3 +187,5 @@ export const useStore = create<AppState>((set, get) => ({
     return state.coffeeData.find(coffee => coffee.id === id);
   },
 }));
+
+export const useCoffeeStore = useStore;

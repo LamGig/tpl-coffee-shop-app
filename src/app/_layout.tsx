@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import { View } from 'react-native';
 import { BottomNavigation, TabName } from '@/src/components/BottomNavigation';
 import { useStore } from '@/src/store';
@@ -10,7 +10,24 @@ export default function RootLayout() {
 
   const handleTabPress = (tab: TabName) => {
     setActiveTab(tab);
-    console.log(`Navigate to ${tab} screen`);
+    
+    // Navigate to the appropriate screen
+    switch(tab) {
+      case 'Home':
+        router.push({ pathname: '/' as any });
+        break;
+      case 'Cart':
+        router.push({ pathname: '/cart' as any });
+        break;
+      case 'Orders':
+        // TODO: Navigate to Orders screen when implemented
+        console.log('Navigate to Orders screen');
+        break;
+      case 'Profile':
+        // TODO: Navigate to Profile screen when implemented
+        console.log('Navigate to Profile screen');
+        break;
+    }
   };
 
   return (

@@ -48,11 +48,11 @@ const mockCoffees: Coffee[] = [
     price: 6.50,
     image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400',
     description: 'Smooth espresso with chilled milk and ice, perfectly balanced.',
+    ...defaultOptions,
     temperatures: [
       { id: 'cold', name: 'Cold', available: true },
       { id: 'hot', name: 'Hot', available: false },
     ],
-    ...defaultOptions,
   },
   {
     id: '2',
@@ -78,11 +78,11 @@ const mockCoffees: Coffee[] = [
     price: 7.00,
     image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=400',
     description: 'Smooth, refreshing coffee steeped in cold water for 12 hours.',
+    ...defaultOptions,
     temperatures: [
       { id: 'cold', name: 'Cold', available: true },
       { id: 'hot', name: 'Hot', available: false },
     ],
-    ...defaultOptions,
   },
   {
     id: '4',
@@ -231,7 +231,7 @@ export default function HomeScreen() {
   const handleCoffeePress = (coffee: Coffee) => {
     setCoffeeData(mockCoffees);
     router.push({
-      pathname: '/details/[id]',
+      pathname: '/details/[id]' as any,
       params: { id: coffee.id }
     });
   };

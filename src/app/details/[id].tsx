@@ -98,7 +98,7 @@ export default function CoffeeDetailsScreen() {
     };
     
     addToCartWithOptions(coffee, options);
-    router.back();
+    router.push({ pathname: '/cart' as any });
   };
 
   if (!coffee) {
