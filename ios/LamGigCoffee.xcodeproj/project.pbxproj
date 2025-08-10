@@ -9,25 +9,25 @@
 /* Begin PBXBuildFile section */
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		B3E51E885484F28F10801B9D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749D115A1AAB9787DDE85C78 /* ExpoModulesProvider.swift */; };
+		6C74D89752DD5C5911A048C1 /* libPods-LamGigCoffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEFC198DFB047E7A666CFB0A /* libPods-LamGigCoffee.a */; };
+		8AE0B6B6A9D32550ED850EED /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2731EDC852D4551DE672D2B8 /* PrivacyInfo.xcprivacy */; };
+		95438386F6B18B001C40148D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BA885E9841AFC9F1C22961 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		C1F742371122F1719E77A3E1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 692F5C17DF956FA7EB74B0A2 /* PrivacyInfo.xcprivacy */; };
-		D88AAA15BD5D7EC7D1921D47 /* libPods-LamGigCoffee.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB4E79FF4A6C64304CD777D /* libPods-LamGigCoffee.a */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05BA885E9841AFC9F1C22961 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-LamGigCoffee/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* LamGigCoffee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LamGigCoffee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LamGigCoffee/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = LamGigCoffee/Info.plist; sourceTree = "<group>"; };
-		692F5C17DF956FA7EB74B0A2 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = LamGigCoffee/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		6D2F88798BAEAEF62B51077D /* Pods-LamGigCoffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LamGigCoffee.debug.xcconfig"; path = "Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee.debug.xcconfig"; sourceTree = "<group>"; };
-		749D115A1AAB9787DDE85C78 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-LamGigCoffee/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		7818CB39BB5D9CBA2BDC3253 /* Pods-LamGigCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LamGigCoffee.release.xcconfig"; path = "Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee.release.xcconfig"; sourceTree = "<group>"; };
-		7BB4E79FF4A6C64304CD777D /* libPods-LamGigCoffee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LamGigCoffee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2731EDC852D4551DE672D2B8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = LamGigCoffee/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		38330DAF0E1CED485AF0CA0E /* Pods-LamGigCoffee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LamGigCoffee.release.xcconfig"; path = "Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee.release.xcconfig"; sourceTree = "<group>"; };
+		7CD9B692A3D6E78D870EEFFD /* Pods-LamGigCoffee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LamGigCoffee.debug.xcconfig"; path = "Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee.debug.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = LamGigCoffee/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		EEFC198DFB047E7A666CFB0A /* libPods-LamGigCoffee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LamGigCoffee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = LamGigCoffee/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* LamGigCoffee-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LamGigCoffee-Bridging-Header.h"; path = "LamGigCoffee/LamGigCoffee-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88AAA15BD5D7EC7D1921D47 /* libPods-LamGigCoffee.a in Frameworks */,
+				6C74D89752DD5C5911A048C1 /* libPods-LamGigCoffee.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,26 +53,28 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				692F5C17DF956FA7EB74B0A2 /* PrivacyInfo.xcprivacy */,
+				2731EDC852D4551DE672D2B8 /* PrivacyInfo.xcprivacy */,
 			);
 			name = LamGigCoffee;
+			sourceTree = "<group>";
+		};
+		1673500B6CD9984A51A19F7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7CD9B692A3D6E78D870EEFFD /* Pods-LamGigCoffee.debug.xcconfig */,
+				38330DAF0E1CED485AF0CA0E /* Pods-LamGigCoffee.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				7BB4E79FF4A6C64304CD777D /* libPods-LamGigCoffee.a */,
+				EEFC198DFB047E7A666CFB0A /* libPods-LamGigCoffee.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		34BCF6DFBEF3994562D8F26F /* LamGigCoffee */ = {
-			isa = PBXGroup;
-			children = (
-				749D115A1AAB9787DDE85C78 /* ExpoModulesProvider.swift */,
-			);
-			name = LamGigCoffee;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -89,8 +91,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				FBC4A7981CD4B2A527CD8B04 /* Pods */,
-				9085A5F4252359EAAE8ABD83 /* ExpoModulesProviders */,
+				1673500B6CD9984A51A19F7E /* Pods */,
+				A7D966200A6C6BC4F254D295 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -105,10 +107,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9085A5F4252359EAAE8ABD83 /* ExpoModulesProviders */ = {
+		8DD141EBCC87D409ED6A84FC /* LamGigCoffee */ = {
 			isa = PBXGroup;
 			children = (
-				34BCF6DFBEF3994562D8F26F /* LamGigCoffee */,
+				05BA885E9841AFC9F1C22961 /* ExpoModulesProvider.swift */,
+			);
+			name = LamGigCoffee;
+			sourceTree = "<group>";
+		};
+		A7D966200A6C6BC4F254D295 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				8DD141EBCC87D409ED6A84FC /* LamGigCoffee */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
@@ -122,16 +132,6 @@
 			path = LamGigCoffee/Supporting;
 			sourceTree = "<group>";
 		};
-		FBC4A7981CD4B2A527CD8B04 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6D2F88798BAEAEF62B51077D /* Pods-LamGigCoffee.debug.xcconfig */,
-				7818CB39BB5D9CBA2BDC3253 /* Pods-LamGigCoffee.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,13 +140,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "LamGigCoffee" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				6D0EBFB8644D7A4D734DD995 /* [Expo] Configure project */,
+				BEAAF3F9388EB60D20D2761B /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				5EAE4BFE58341CB4A45789B8 /* [CP] Embed Pods Frameworks */,
+				C7F2A4C42358C2E23A79BA25 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -196,7 +196,7 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				C1F742371122F1719E77A3E1 /* PrivacyInfo.xcprivacy in Resources */,
+				8AE0B6B6A9D32550ED850EED /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,43 +240,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5EAE4BFE58341CB4A45789B8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6D0EBFB8644D7A4D734DD995 /* [Expo] Configure project */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[Expo] Configure project";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-LamGigCoffee/expo-configure-project.sh\"\n";
-		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -313,6 +276,43 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BEAAF3F9388EB60D20D2761B /* [Expo] Configure project */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[Expo] Configure project";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-LamGigCoffee/expo-configure-project.sh\"\n";
+		};
+		C7F2A4C42358C2E23A79BA25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LamGigCoffee/Pods-LamGigCoffee-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -321,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				B3E51E885484F28F10801B9D /* ExpoModulesProvider.swift in Sources */,
+				95438386F6B18B001C40148D /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +330,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D2F88798BAEAEF62B51077D /* Pods-LamGigCoffee.debug.xcconfig */;
+			baseConfigurationReference = 7CD9B692A3D6E78D870EEFFD /* Pods-LamGigCoffee.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -366,7 +366,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7818CB39BB5D9CBA2BDC3253 /* Pods-LamGigCoffee.release.xcconfig */;
+			baseConfigurationReference = 38330DAF0E1CED485AF0CA0E /* Pods-LamGigCoffee.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
