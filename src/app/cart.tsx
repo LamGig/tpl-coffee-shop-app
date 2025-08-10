@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
+  Alert,
   FlatList,
   Image,
   Modal,
@@ -194,7 +195,10 @@ export default function CartScreen() {
         {/* Payment Method */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Payment Method</Text>
-          <TouchableOpacity style={styles.optionButton}>
+          <TouchableOpacity 
+            style={styles.optionButton}
+            onPress={() => Alert.alert('Demo App', 'This is a test app - no payment will be processed.')}
+          >
             <View style={styles.optionIcon}>
               <Ionicons name="card-outline" size={20} color="#666" />
             </View>
@@ -268,7 +272,10 @@ export default function CartScreen() {
           <Text style={styles.totalLabel}>Total Price</Text>
           <Text style={styles.totalAmount}>${getCartTotal().toFixed(2)}</Text>
         </View>
-        <TouchableOpacity style={styles.payButton}>
+        <TouchableOpacity 
+          style={styles.payButton}
+          onPress={() => Alert.alert('Demo App', 'This is a test app; no payment will be processed.')}
+        >
           <Text style={styles.payButtonText}>Pay Now</Text>
           <Ionicons name="arrow-forward" size={20} color="#fff" />
         </TouchableOpacity>
