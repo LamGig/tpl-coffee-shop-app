@@ -14,6 +14,7 @@
     },
     "android": {
       "versionCode": 1,
+      "edgeToEdgeEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#fdf2de"
@@ -22,8 +23,7 @@
         "android.permission.ACCESS_NETWORK_STATE",
         "android.permission.INTERNET"
       ],
-      "package": "com.lamgig.lamgigcoffee",
-      "edgeToEdgeEnabled": false
+      "package": "com.lamgig.lamgigcoffee"
     },
     "web": {
       "bundler": "metro",
