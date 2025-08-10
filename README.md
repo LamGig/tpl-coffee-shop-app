@@ -45,8 +45,6 @@ npm run ios
 # Android
 npm run android
 
-# Web
-npm run web
 ```
 
 ## 📁 Project Structure
@@ -88,7 +86,6 @@ tpl-coffee-shop-app/
 | `npm start` | Start Expo development server |
 | `npm run android` | Run on Android emulator |
 | `npm run ios` | Run on iOS simulator |
-| `npm run web` | Run in web browser |
 | `npm run lint` | Run ESLint checks |
 
 ### Code Quality
