@@ -34,8 +34,7 @@ export default function RootLayout() {
         router.push({ pathname: '/cart' as any });
         break;
       case 'Orders':
-        // TODO: Navigate to Orders screen when implemented
-        console.log('Navigate to Orders screen');
+        router.push({ pathname: '/orders' as any });
         break;
       case 'Profile':
         // TODO: Navigate to Profile screen when implemented
