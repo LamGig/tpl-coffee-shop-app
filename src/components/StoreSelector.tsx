@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   },
   storeInfo: {
     flex: 1,
+    marginRight: 10,
   },
   label: {
     fontSize: 12,
@@ -116,6 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#333',
     marginRight: 4,
+    flex: 1,
   },
   orderButton: {
     backgroundColor: '#4A2B29',
