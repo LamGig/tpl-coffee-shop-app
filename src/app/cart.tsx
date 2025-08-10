@@ -1,21 +1,21 @@
+import { useCoffeeStore } from '@/src/store';
+import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
   Image,
-  TextInput,
   SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { router } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { useCoffeeStore } from '@/src/store';
 
 export default function CartScreen() {
   const { cart, updateCartItemQuantity, removeFromCart, getCartTotal } = useCoffeeStore();
-  const [orderType, setOrderType] = useState<'Delivery' | 'Take Away'>('Delivery');
+  const [orderType, setOrderType] = useState<'Sit In' | 'To Go'>('Sit In');
   const [storeLocation] = useState('Brew Sanctuary');
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [notes, setNotes] = useState<{ [key: string]: string }>({});
@@ -72,25 +72,25 @@ export default function CartScreen() {
         {/* Order Type Selector */}
         <View style={styles.orderTypeContainer}>
           <TouchableOpacity
-            style={[styles.orderTypeButton, orderType === 'Delivery' && styles.orderTypeActive]}
-            onPress={() => setOrderType('Delivery')}
+            style={[styles.orderTypeButton, orderType === 'Sit In' && styles.orderTypeActive]}
+            onPress={() => setOrderType('Sit In')}
           >
             <View style={styles.orderTypeIcon}>
-              <Ionicons name="bicycle" size={20} color={orderType === 'Delivery' ? '#fff' : '#666'} />
+              <Ionicons name="restaurant" size={20} color={orderType === 'Sit In' ? '#fff' : '#666'} />
             </View>
-            <Text style={[styles.orderTypeText, orderType === 'Delivery' && styles.orderTypeTextActive]}>
-              Delivery
+            <Text style={[styles.orderTypeText, orderType === 'Sit In' && styles.orderTypeTextActive]}>
+              Sit In
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.orderTypeButton, orderType === 'Take Away' && styles.orderTypeActive]}
-            onPress={() => setOrderType('Take Away')}
+            style={[styles.orderTypeButton, orderType === 'To Go' && styles.orderTypeActive]}
+            onPress={() => setOrderType('To Go')}
           >
             <View style={styles.orderTypeIcon}>
-              <Ionicons name="walk" size={20} color={orderType === 'Take Away' ? '#fff' : '#666'} />
+              <Ionicons name="bag-handle" size={20} color={orderType === 'To Go' ? '#fff' : '#666'} />
             </View>
-            <Text style={[styles.orderTypeText, orderType === 'Take Away' && styles.orderTypeTextActive]}>
-              Take Away
+            <Text style={[styles.orderTypeText, orderType === 'To Go' && styles.orderTypeTextActive]}>
+              To Go
             </Text>
           </TouchableOpacity>
         </View>
@@ -158,16 +158,13 @@ export default function CartScreen() {
                       <Ionicons name="add" size={18} color="#666" />
                     </TouchableOpacity>
                   </View>
-                  <TouchableOpacity style={styles.editButton}>
-                    <Ionicons name="create-outline" size={20} color="#666" />
-                  </TouchableOpacity>
                 </View>
                 
                 <View style={styles.noteContainer}>
                   <Ionicons name="document-text-outline" size={16} color="#999" />
                   <TextInput
                     style={styles.noteInput}
-                    placeholder="Note for driver"
+                    placeholder="Order Note"
                     value={notes[item.id] || ''}
                     onChangeText={(text) => setNotes({ ...notes, [item.id]: text })}
                     placeholderTextColor="#999"
