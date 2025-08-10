@@ -21,6 +21,9 @@ export default function CartScreen() {
   const [orderType, setOrderType] = useState<'Sit In' | 'To Go'>('Sit In');
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [notes, setNotes] = useState<{ [key: string]: string }>({});
+  const [showVoucherModal, setShowVoucherModal] = useState(false);
+  const [voucherCode, setVoucherCode] = useState('');
+  const [appliedVoucher, setAppliedVoucher] = useState<{ code: string; discount: number; type: 'percentage' | 'fixed' } | null>(null);
 
   const handleQuantityChange = (itemId: string, change: number) => {
     const item = cart.find(i => i.id === itemId);
@@ -59,6 +62,49 @@ export default function CartScreen() {
       parts.push(`${options.toppings.join(', ')}`);
     }
     return parts;
+  };
+
+  const validateVoucher = (code: string) => {
+    // Sample voucher codes - in real app, this would validate against a backend
+    const vouchers: { [key: string]: { discount: number; type: 'percentage' | 'fixed' } } = {
+      'COFFEE10': { discount: 10, type: 'percentage' },
+      'SAVE5': { discount: 5, type: 'fixed' },
+      'WELCOME20': { discount: 20, type: 'percentage' },
+      'FREESHIP': { discount: 3, type: 'fixed' },
+      'SUMMER15': { discount: 15, type: 'percentage' },
+    };
+
+    const upperCode = code.toUpperCase().trim();
+    if (vouchers[upperCode]) {
+      return { code: upperCode, ...vouchers[upperCode] };
+    }
+    return null;
+  };
+
+  const handleApplyVoucher = () => {
+    const voucher = validateVoucher(voucherCode);
+    if (voucher) {
+      setAppliedVoucher(voucher);
+      setShowVoucherModal(false);
+      Alert.alert('Success', `Voucher "${voucher.code}" applied successfully!`);
+    } else {
+      Alert.alert('Invalid Voucher', 'The voucher code you entered is not valid.');
+    }
+  };
+
+  const calculateDiscount = () => {
+    if (!appliedVoucher) return 0;
+    const subtotal = getCartTotal();
+    
+    if (appliedVoucher.type === 'percentage') {
+      return (subtotal * appliedVoucher.discount) / 100;
+    } else {
+      return Math.min(appliedVoucher.discount, subtotal);
+    }
+  };
+
+  const getFinalTotal = () => {
+    return Math.max(0, getCartTotal() - calculateDiscount());
   };
 
   return (
@@ -180,15 +226,30 @@ export default function CartScreen() {
         {/* Discount Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Discount</Text>
-          <TouchableOpacity style={styles.optionButton}>
+          <TouchableOpacity 
+            style={styles.optionButton}
+            onPress={() => setShowVoucherModal(true)}
+          >
             <View style={styles.optionIcon}>
-              <Ionicons name="pricetag-outline" size={20} color="#666" />
+              <Ionicons name="pricetag-outline" size={20} color={appliedVoucher ? '#C4914D' : '#666'} />
             </View>
             <View style={styles.optionContent}>
-              <Text style={styles.optionTitle}>Voucher</Text>
-              <Text style={styles.optionSubtitle}>Click to select voucher</Text>
+              <Text style={styles.optionTitle}>
+                {appliedVoucher ? `${appliedVoucher.code} Applied` : 'Voucher'}
+              </Text>
+              <Text style={styles.optionSubtitle}>
+                {appliedVoucher 
+                  ? `${appliedVoucher.discount}${appliedVoucher.type === 'percentage' ? '%' : '$'} discount`
+                  : 'Tap to enter discount code'}
+              </Text>
             </View>
-            <Ionicons name="chevron-forward" size={20} color="#666" />
+            {appliedVoucher ? (
+              <TouchableOpacity onPress={() => setAppliedVoucher(null)}>
+                <Ionicons name="close-circle" size={20} color="#C4914D" />
+              </TouchableOpacity>
+            ) : (
+              <Ionicons name="chevron-forward" size={20} color="#666" />
+            )}
           </TouchableOpacity>
         </View>
 
@@ -215,8 +276,22 @@ export default function CartScreen() {
           <Text style={styles.sectionTitle}>Payment Details</Text>
           <View style={styles.paymentDetails}>
             <View style={styles.paymentRow}>
-              <Text style={styles.paymentLabel}>Grand Subtotal</Text>
+              <Text style={styles.paymentLabel}>Subtotal</Text>
               <Text style={styles.paymentValue}>${getCartTotal().toFixed(2)}</Text>
+            </View>
+            {appliedVoucher && (
+              <View style={styles.paymentRow}>
+                <Text style={styles.paymentLabel}>
+                  Discount ({appliedVoucher.code})
+                </Text>
+                <Text style={[styles.paymentValue, { color: '#C4914D' }]}>
+                  -${calculateDiscount().toFixed(2)}
+                </Text>
+              </View>
+            )}
+            <View style={[styles.paymentRow, { borderTopWidth: 1, borderTopColor: '#f0f0f0', paddingTop: 12, marginTop: 8 }]}>
+              <Text style={[styles.paymentLabel, { fontWeight: '600' }]}>Total</Text>
+              <Text style={[styles.paymentValue, { fontSize: 18 }]}>${getFinalTotal().toFixed(2)}</Text>
             </View>
           </View>
         </View>
@@ -266,11 +341,63 @@ export default function CartScreen() {
         </TouchableOpacity>
       </Modal>
 
+      {/* Voucher Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={showVoucherModal}
+        onRequestClose={() => setShowVoucherModal(false)}
+      >
+        <TouchableOpacity 
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={() => setShowVoucherModal(false)}
+        >
+          <TouchableOpacity 
+            style={styles.voucherModalContent}
+            activeOpacity={1}
+          >
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Enter Voucher Code</Text>
+              <TouchableOpacity onPress={() => setShowVoucherModal(false)}>
+                <Ionicons name="close" size={24} color="#333" />
+              </TouchableOpacity>
+            </View>
+            
+            <View style={styles.voucherInputContainer}>
+              <TextInput
+                style={styles.voucherInput}
+                placeholder="Enter voucher code"
+                value={voucherCode}
+                onChangeText={setVoucherCode}
+                autoCapitalize="characters"
+                placeholderTextColor="#999"
+              />
+              <TouchableOpacity 
+                style={styles.applyButton}
+                onPress={handleApplyVoucher}
+              >
+                <Text style={styles.applyButtonText}>Apply</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.voucherHints}>
+              <Text style={styles.hintTitle}>Available Vouchers (Demo):</Text>
+              <Text style={styles.hintItem}>• COFFEE10 - 10% off</Text>
+              <Text style={styles.hintItem}>• SAVE5 - $5 off</Text>
+              <Text style={styles.hintItem}>• WELCOME20 - 20% off</Text>
+              <Text style={styles.hintItem}>• SUMMER15 - 15% off</Text>
+              <Text style={styles.hintItem}>• FREESHIP - $3 off</Text>
+            </View>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
+
       {/* Bottom Payment Button */}
       <View style={styles.bottomContainer}>
         <View style={styles.totalContainer}>
           <Text style={styles.totalLabel}>Total Price</Text>
-          <Text style={styles.totalAmount}>${getCartTotal().toFixed(2)}</Text>
+          <Text style={styles.totalAmount}>${getFinalTotal().toFixed(2)}</Text>
         </View>
         <TouchableOpacity 
           style={styles.payButton}
@@ -615,5 +742,56 @@ const styles = StyleSheet.create({
   storeItemAddress: {
     fontSize: 14,
     color: '#666',
+  },
+  voucherModalContent: {
+    backgroundColor: '#FFF',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 20,
+    paddingBottom: 40,
+  },
+  voucherInputContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    gap: 10,
+  },
+  voucherInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: '#333',
+  },
+  applyButton: {
+    backgroundColor: '#6B4423',
+    paddingHorizontal: 25,
+    paddingVertical: 12,
+    borderRadius: 12,
+    justifyContent: 'center',
+  },
+  applyButtonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  voucherHints: {
+    paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  hintTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 10,
+  },
+  hintItem: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 6,
+    paddingLeft: 10,
   },
 });
