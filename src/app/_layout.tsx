@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Stack, router, usePathname } from "expo-router";
-import { View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { BottomNavigation, TabName } from '@/src/components/BottomNavigation';
 import { useStore } from '@/src/store';
+import { Stack, router, usePathname } from "expo-router";
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function RootLayout() {
   const [activeTab, setActiveTab] = useState<TabName>('Home');
@@ -23,9 +23,22 @@ export default function RootLayout() {
     }
   }, [pathname]);
 
+  // NEW: Feed — tách effect riêng để không đụng code cũ
+  useEffect(() => {
+     if (pathname === '/feed' || pathname.endsWith('/feed')) {
+      setActiveTab('Feed' as TabName);
+    }
+  }, [pathname]);
+
   const handleTabPress = (tab: TabName) => {
     setActiveTab(tab);
     
+    // NEW: Feed — xử lý trước, không chỉnh switch cũ
+    if (tab === ('Feed' as TabName)) {
+      router.push({ pathname: '/feed' as any });
+      return;
+    }
+
     // Navigate to the appropriate screen
     switch(tab) {
       case 'Home':
