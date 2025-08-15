@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export type TabName = 'Home' | 'Cart' | 'Orders' | 'Profile';
+export type TabName = 'Home' | 'Cart' | 'Feed' | 'Orders' | 'Profile';
 
 interface BottomNavigationProps {
   activeTab: TabName;
@@ -16,16 +16,59 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   cartItemCount = 0
 }) => {
   const tabs: { name: TabName; icon: string; activeIcon: string }[] = [
-    { name: 'Home', icon: 'home-outline', activeIcon: 'home' },
-    { name: 'Cart', icon: 'cart-outline', activeIcon: 'cart' },
+    { name: 'Home',   icon: 'home-outline',   activeIcon: 'home' },
+    { name: 'Cart',   icon: 'cart-outline',   activeIcon: 'cart' },
+
+    // NEW: Feed ở giữa Cart & Orders
+    // (icon/activeIcon đặt giá trị tạm để thỏa type; phần render bên dưới custom riêng)
+    { name: 'Feed',   icon: 'ellipse-outline', activeIcon: 'ellipse' },
+
     { name: 'Orders', icon: 'receipt-outline', activeIcon: 'receipt' },
-    { name: 'Profile', icon: 'person-outline', activeIcon: 'person' },
+    { name: 'Profile',icon: 'person-outline',  activeIcon: 'person' },
   ];
 
   return (
     <View style={styles.container}>
       {tabs.map((tab) => {
         const isActive = activeTab === tab.name;
+
+        // NEW: render riêng cho Feed (icon tròn)
+        if (tab.name === 'Feed') {
+          return (
+            <TouchableOpacity
+              key="Feed"
+              style={styles.tab}
+              onPress={() => onTabPress('Feed')}
+              activeOpacity={0.85}
+            >
+              <View style={styles.feedWrap}>
+                <View
+                  style={[
+                    styles.feedCircle,
+                    { backgroundColor: isActive ? '#6D4C41' : '#4E342E' },
+                  ]}
+                >
+                  <Ionicons
+                    name="cafe"
+                    size={22}
+                    color={isActive ? '#FFFFFF' : '#FFFFFFCC'}
+                  />
+                </View>
+                <Text
+                  style={[
+                    styles.tabText,
+                    { color: isActive ? '#4A2B29' : '#6B6B6B' },
+                    isActive && styles.tabTextActive,
+                  ]}
+                >
+                  Feed
+                </Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }
+
+        // Giữ nguyên render cũ cho các tab còn lại
         return (
           <TouchableOpacity
             key={tab.name}
@@ -63,10 +106,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingTop: 10,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: -2,
-    },
+    shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 5,
@@ -103,5 +143,22 @@ const styles = StyleSheet.create({
   tabTextActive: {
     color: '#4A2B29',
     fontWeight: '500',
+  },
+
+  // NEW: style cho Feed
+  feedWrap: { alignItems: 'center' },
+  feedCircle: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 4,
+    // đổ bóng nhẹ
+    shadowColor: '#000',
+    shadowOpacity: 0.12,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 3,
   },
 });
